@@ -17,39 +17,49 @@ STEP-5: Display the cipher text obtained above.
 
 ## PROGRAM:
 ```
-Name:Thaslima Banu V
-Reg.no:26018475
+#include <stdio.h>  
+#include <string.h> 
 
-#include <stdio.h>
-#include <string.h>
+int main() { 
+    char text[100], original[100]; 
+    int key, i; 
+    
+    printf("Enter the plain text: "); 
+    fgets(text, sizeof(text), stdin); 
+    text[strcspn(text, "\n")] = '\0'; 
 
-int main() {
-    char text[100];
-    int key, i;
+    printf("Enter the key value: "); 
+    scanf("%d", &key); 
 
-    printf("Enter plain text: ");
-    scanf("%s", text);
+    key = ((key % 26) + 26) % 26; 
 
-    printf("Enter key: ");
-    scanf("%d", &key);
+    strcpy(original, text); 
 
-    key = (key % 26 + 26) % 26;
+    // Encryption logic (STEP-3 & STEP-4)
+    for (i = 0; text[i] != '\0'; i++) { 
+        if (text[i] >= 'A' && text[i] <= 'Z') 
+            text[i] = (text[i] - 'A' + key) % 26 + 'A'; 
+        else if (text[i] >= 'a' && text[i] <= 'z') 
+            text[i] = (text[i] - 'a' + key) % 26 + 'a'; 
+    } 
 
-    for (i = 0; text[i] != '\0'; i++) {
-        if (text[i] >= 'A' && text[i] <= 'Z')
-            text[i] = (text[i] - 'A' + key) % 26 + 'A';
-        else if (text[i] >= 'a' && text[i] <= 'z')
-            text[i] = (text[i] - 'a' + key) % 26 + 'a';
-    }
+    printf("Encrypted text: %s\n", text); 
 
-    printf("Cipher text: %s\n", text);
+    // Decryption logic to restore original text
+    for (i = 0; text[i] != '\0'; i++) { 
+        if (text[i] >= 'A' && text[i] <= 'Z') 
+            text[i] = (text[i] - 'A' - key + 26) % 26 + 'A'; 
+        else if (text[i] >= 'a' && text[i] <= 'z') 
+            text[i] = (text[i] - 'a' - key + 26) % 26 + 'a'; 
+    } 
 
-    return 0;
+    printf("Decrypted text: %s\n", text); 
+
+    return 0; 
 }
-```
 
 ## OUTPUT:
-<img width="1366" height="793" alt="image" src="https://github.com/user-attachments/assets/151f1fdb-0016-4c89-a844-458a4b82f166" />
+
 
 
 ## RESULT :
