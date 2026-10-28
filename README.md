@@ -22,39 +22,38 @@ STEP-5: Display the cipher text obtained above.
 int main() {
     char text[100];
     int key, i;
+    
+ printf("Enter the plain text: ");
+fgets(text, sizeof(text), stdin);
+    
+text[strcspn(text, "\n")] = 0;
 
-    // STEP-1: Read the plain text from the user
-    printf("Enter the plain text: ");
-    fgets(text, sizeof(text), stdin);
-    // Remove newline character if present
-    text[strcspn(text, "\n")] = 0;
-
-    // STEP-2: Read the key value from the user
-    printf("Enter the key value: ");
+     
+ printf("Enter the key value: ");
     scanf("%d", &key);
 
-    // STEP-3 & STEP-4: Encryption/Decryption logic based on key sign
-    for (i = 0; text[i] != '\0'; ++i) {
-        char ch = text[i];
+    
+  for (i = 0; text[i] != '\0'; ++i) {
+     char ch = text[i];
 
-        // Check for uppercase letters
-        if (ch >= 'A' && ch <= 'Z') {
+        
+  if (ch >= 'A' && ch <= 'Z') {
             ch = ((ch - 'A') + key) % 26;
-            if (ch < 0) ch += 26; // Handle negative keys
+            if (ch < 0) ch += 26;
             text[i] = ch + 'A';
         }
-        // Check for lowercase letters
-        else if (ch >= 'a' && ch <= 'z') {
-            ch = ((ch - 'a') + key) % 26;
-            if (ch < 0) ch += 26; // Handle negative keys
-            text[i] = ch + 'a';
+        
+  else if (ch >= 'a' && ch <= 'z') {
+         ch = ((ch - 'a') + key) % 26;
+        if (ch < 0) ch += 26; 
+        text[i] = ch + 'a';
         }
     }
 
-    // STEP-5: Display the cipher text obtained above
-    printf("Encrypted Cipher Text: %s\n", text);
+    
+  printf("Encrypted Cipher Text: %s\n", text);
 
-    return 0;
+ return 0;
 }
 
 ## OUTPUT:
